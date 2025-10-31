@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,8 +14,41 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.pawcircle.app"),
   title: "PawCircle | Build your pet's village",
-  description: "PawCircle helps pet parents bring their village together. Share updates, set a wishlist, and let friends and fans chip in for real care and happy moments.",
+  description:
+    "PawCircle helps pet parents bring their village together. Share updates, set a wishlist, and let friends and fans chip in for real care and happy moments.",
+  keywords: [
+    "PawCircle",
+    "pet parents",
+    "pet community",
+    "pet wishlist",
+    "dog app",
+    "cat app",
+    "support pets",
+    "fur baby village",
+  ],
+  icons: {
+    icon: "/icon.svg",
+  },
+  openGraph: {
+    title: "PawCircle | Build your pet's village",
+    description:
+      "Create your pet’s page, share updates, wishlists, and real support in one place.",
+    url: "https://www.pawcircle.app",
+    siteName: "PawCircle",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "PawCircle | Build your pet's village",
+    description:
+      "Updates, wishlists, and support in one link. Join the waitlist at pawcircle.app.",
+  },
+  alternates: {
+    canonical: "https://www.pawcircle.app",
+  },
 };
 
 export default function RootLayout({
