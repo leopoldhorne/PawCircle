@@ -1,6 +1,6 @@
 import { faCheckDouble, faClipboardList, faHandHoldingHeart, faHandshake, faHandsHoldingCircle, faParachuteBox } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
-import WhyCard from "./ui/WhyCard";
+import WhyCard from "../ui/WhyCard";
 
 const WhySection = () => {
   const parents =[

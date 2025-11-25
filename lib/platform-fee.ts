@@ -1,0 +1,1 @@
+export const platformFee = 0.20

@@ -4,10 +4,10 @@ import { faArrowRight, faPaw } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { updateTag } from "next/cache";
 import React, { useEffect, useState } from "react";
-import { checkEmail, updateValues } from "../actions";
-import AlreadyJoined from "./ui/AlreadyJoined";
-import SuccessPopup from "./ui/SuccessPopup";
-import ErrorPopup from "./ui/ErrorPopup";
+import { checkEmail, updateValues } from "@/features/waitlist/server-waitlist/actions";
+import AlreadyJoined from "../../features/waitlist/ui/AlreadyJoined";
+import SuccessPopup from "../../features/waitlist/ui/SuccessPopup";
+import ErrorPopup from "../../features/waitlist/ui/ErrorPopup";
 
 const Waitlist = () => {
   const [petName, setPetName] = useState<string>("");

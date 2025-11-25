@@ -49,10 +49,17 @@ const Navbar = ({navOpen, setNavOpen}: NavProps) => {
             FAQ
           </a>
         </div>
-        <div className="cta max-lg:hidden">
+        <div className="cta max-lg:hidden flex items-center justify-center gap-2">
+          <a href="/auth">
+          <button className="text-lg text-black font-medium rounded-xl py-1 px-2 cursor-pointer hover:-translate-y-0.5 ease-in-out duration-300">
+            Sign In
+          </button>
+          </a>
+          <a href="#waitlist">
           <button className="text-lg text-white font-medium bg-purple-700 rounded-xl py-1 px-2 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 ease-in-out duration-300">
             Join the waitlist
           </button>
+          </a>
         </div>
         <div className="lg:hidden cursor-pointer size-fit overflow-hidden">
           <FontAwesomeIcon icon={faBars} className="text-3xl" onClick={() => setNavOpen(true)}/>
