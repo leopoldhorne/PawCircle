@@ -1,24 +1,35 @@
 "use client";
+
+import { Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
 
-const Page = () => {
+function ThankYouInner() {
   const params = useSearchParams();
   const petName = params.get("petName");
   const imageUrl = params.get("imageUrl");
   const amount = params.get("amount");
 
-  useEffect(() => {
-    console.log(params);
-  }, []);
+  const capitalizedPetName =
+    petName && petName.length > 0
+      ? petName[0].toUpperCase() + petName.slice(1)
+      : "";
+
+  const formattedAmount =
+    amount != null
+      ? (Number(amount) / 100).toLocaleString("en-US", {
+          style: "currency",
+          currency: "USD",
+        })
+      : null;
 
   return (
     <div className="bg-purple-50 w-screen h-screen">
       <div className="p-6 flex flex-col items-center">
-        <h1 className="text-2xl font-bold mb-4">
-          Thank you for supporting {petName && petName[0].toUpperCase() + petName.slice(1)}!
+        <h1 className="text-2xl font-bold mb-4 text-center">
+          Thank you for supporting{" "}
+          {capitalizedPetName || "your fur baby"}!
         </h1>
 
         {imageUrl && (
@@ -31,22 +42,33 @@ const Page = () => {
           />
         )}
 
-        <p className="text-lg text-gray-700">
-          Your gift of <span className="font-semibold">{amount && (+amount/100).toLocaleString("en-US", {style: "currency", currency: "USD"})}</span> means so
-          much.
+        <p className="text-lg text-gray-700 text-center">
+          Your gift of{" "}
+          {formattedAmount && (
+            <span className="font-semibold">{formattedAmount}</span>
+          )}{" "}
+          means so much.
         </p>
 
-        <Button
-          onClick={() =>
-            (window.location.href = `/p/${petName?.toLowerCase()}`)
-          }
-          className="mt-5"
-        >
-          Back to {petName && petName[0].toUpperCase() + petName.slice(1)}'s Circle
-        </Button>
+        {petName && (
+          <Button
+            onClick={() =>
+              (window.location.href = `/p/${petName.toLowerCase()}`)
+            }
+            className="mt-5"
+          >
+            Back to {capitalizedPetName}'s Circle
+          </Button>
+        )}
       </div>
     </div>
   );
-};
+}
 
-export default Page;
+export default function Page() {
+  return (
+    <Suspense fallback={<div className="p-6">Loading...</div>}>
+      <ThankYouInner />
+    </Suspense>
+  );
+}
