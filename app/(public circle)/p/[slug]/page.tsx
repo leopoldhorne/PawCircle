@@ -209,11 +209,8 @@ const Page = () => {
                   a gift
                 </p>
                 <p className="text-xs text-slate-600 max-w-sm mx-auto">
-                  {circleData?.support_blurb}
+                  {circleInfo?.support_blurb}
                 </p>
-                {/* <button className="mt-2 inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold bg-violet-600 text-white shadow-sm hover:bg-violet-700 transition">
-                  Send a one-time gift
-                </button> */}
                 <div className="w-full flex gap-5 items-center justify-center">
                   <Button
                     onClick={() => handleGift(300)}
