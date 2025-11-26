@@ -29,7 +29,9 @@ const fetchCircle = async (slug: string): Promise<CircleAndPet | null> => {
   }
 
   const petInfo = Object.fromEntries(
-    Object.entries(data[0]).filter(([key, value]) => typeof value === "string" || typeof value === "number")
+    Object.entries(data[0]).filter(
+      ([key, value]) => typeof value === "string" || typeof value === "number"
+    )
   ); // idk tbh but it works to filter object into just pet
 
   const circleInfo = data![0].circles[0];
@@ -72,7 +74,6 @@ const checkoutGift = async (
     }),
   });
 
-
   // console.log(petId)
   // console.log(
   //   JSON.stringify({
@@ -96,8 +97,6 @@ const checkoutGift = async (
 
 const Page = () => {
   const { slug } = useParams();
-  const router = useRouter();
-  const { pet, circleData, isLoadingCircleData } = useAuth();
 
   const { data, error, isLoading } = useQuery<CircleAndPet | null, Error>({
     queryKey: ["data", slug],
@@ -141,17 +140,18 @@ const Page = () => {
             <>
               {/* Header */}
               <div className="flex items-center gap-4 w-full justify-center">
-                <div className="h-14 w-14 rounded-full overflow-hidden">
-                  <Image
-                    src={
-                      circleInfo?.profile_image_url &&
-                      circleInfo?.profile_image_url
-                    }
-                    alt="pet"
-                    width={80}
-                    height={80}
-                    className="h-full w-full object-cover"
-                  />
+                <div className="h-14 w-14 rounded-full overflow-hidden flex items-center justify-center bg-gray-50">
+                  {circleInfo?.profile_image_url ? (
+                    <Image
+                      src={circleInfo.profile_image_url}
+                      alt="pet"
+                      width={80}
+                      height={80}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <span className="text-3xl">🐾</span>
+                  )}
                 </div>
 
                 <div>
@@ -208,7 +208,7 @@ const Page = () => {
                     }`}{" "}
                   a gift
                 </p>
-                <p className="text-xs text-slate-600 max-w-sm mx-auto">
+                <p className="text-sm leading-relaxed text-slate-700 font-normal">
                   {circleInfo?.support_blurb}
                 </p>
                 <div className="w-full flex gap-5 items-center justify-center">
