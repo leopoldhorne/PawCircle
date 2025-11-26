@@ -29,7 +29,7 @@ const fetchCircle = async (slug: string): Promise<CircleAndPet | null> => {
   }
 
   const petInfo = Object.fromEntries(
-    Object.entries(data[0]).filter(([key, value]) => typeof value === "string" || "number")
+    Object.entries(data[0]).filter(([key, value]) => typeof value === "string" || typeof value === "number")
   ); // idk tbh but it works to filter object into just pet
 
   const circleInfo = data![0].circles[0];
