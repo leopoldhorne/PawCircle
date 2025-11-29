@@ -1,43 +1,46 @@
-"use client"
-
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
-import Navbar from "./Navbar";
-import NavMenu from "./NavMenu";
+import Image from "next/image";
+import { Button } from "../ui/button";
+import Logo from "../logo/logo";
 
 const Hero = () => {
-  const[navOpen, setNavOpen] = useState<boolean>(false)
-  
-  
   return (
-    <header className="h-screen flex flex-col justify-center bg-purple-50">
-      <NavMenu navOpen={navOpen} setNavOpen={setNavOpen}/>
-      <Navbar navOpen={navOpen} setNavOpen={setNavOpen}/>
-      <div className="wrapper max-w-6xl mx-auto px-2 py-2 flex flex-col justify-center items-center gap-5 h-full">
-        <h1 className="title text-6xl font-bold text-center w-[90%] max-sm:text-5xl max-sm:w-[95%]">
-          Raise your fur baby with a village
-        </h1>
-        <p className="title text-3xl text-center w-[90%] max-sm:text-xl">
-          PawCircle makes it easy for friends and fans to chip in for real care
-          and get adorable updates in return.
-        </p>
-        <div className="cta flex gap-7 items-center max-sm:flex-col">
-          <a
-            href="#waitlist"
-            className="text-lg text-white font-medium bg-purple-700 rounded-xl py-1 px-2 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 ease-in-out duration-300"
-          >
-            <button className="cursor-pointer">
-              Join the waitlist{" "}
-              <FontAwesomeIcon icon={faArrowRight} className="" />
-            </button>
+    <header className="min-h-screen flex flex-col bg-purple-50 justify-center relative">
+      <nav className="w-full h-20 top-0 absolute px-2">
+        <div className="wrapper max-w-6xl mx-auto py-2 flex justify-between items-center gap-1 h-full w-full">
+          <div className="flex gap-1">
+            <Logo />
+            <span className="text-2xl text-purple-600 font-bold">
+              PawCircle
+            </span>
+          </div>
+          <a href="/auth">
+            <Button className="w-30 cursor-pointer">Sign In</Button>
           </a>
-          <a
-            href="#how-it-works"
-            className=" text-lg underline text-purple-700 hover:text-purple-500 ease-in-out duration-300"
-          >
-            See how it works
+        </div>
+      </nav>
+      <div className="wrapper max-w-6xl mx-auto px-2 py-2 flex justify-between items-center gap-1 h-full w-full max-md:flex-col max-md:gap-5 max-md:mt-25">
+        <div className="flex flex-col gap-5 max-md:items-center">
+          <h1 className="text-4xl font-bold text-black justify-start max-md:text-center max-md:text-2xl">
+            Create a profile for your pet.
+            <br />
+            Loved ones can show Support.
+          </h1>
+          <p className="text-lg max-md:text-center max-md:text-base">
+            You’ll get a shareable page for your pet where your close circle can
+            support them. We’re actively inviting early users from the waitlist.
+            Join to be included.
+          </p>
+          <a href="#waitlist">
+            <Button className="w-fit cursor-pointer">Join Waitlist</Button>
           </a>
+        </div>
+        <div className="">
+          <Image
+            src="/images/iPhones (1).png"
+            width={1000}
+            height={1000}
+            alt="iPhones that showcase the PawCircle Pet Profiles"
+          />
         </div>
       </div>
     </header>

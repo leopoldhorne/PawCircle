@@ -8,6 +8,7 @@ import { checkEmail, updateValues } from "@/features/waitlist/server-waitlist/ac
 import AlreadyJoined from "../../features/waitlist/ui/AlreadyJoined";
 import SuccessPopup from "../../features/waitlist/ui/SuccessPopup";
 import ErrorPopup from "../../features/waitlist/ui/ErrorPopup";
+import { Button } from "../ui/button";
 
 const Waitlist = () => {
   const [petName, setPetName] = useState<string>("");
@@ -89,17 +90,17 @@ const Waitlist = () => {
       <ErrorPopup errorNotif={errorNotif} />
       <AlreadyJoined alreadyJoined={alreadyJoined} />
       <SuccessPopup success={success} />
-      <section id="waitlist" className="bg-purple-50 h-fit">
+      <section id="waitlist" className="bg-white h-fit">
         <div className="wrapper max-w-6xl mx-auto px-5 py-10 flex flex-col justify-center items-center gap-5 h-full text-center">
-          <h4 className="title text-5xl font-bold">
-            Ready to build your village?
+          <h4 className="title text-4xl font-bold max-md:text-2xl">
+            Be one of the first to try PawCircle
           </h4>
-          <p className="para text-base">
-            Bring your pet’s favorite people together in one place for updates, care, and support. Join the waitlist to be part of PawCircle’s first community of pet parents.
+          <p className="para text-lg md:w-[75%] max-md:text-base">
+            Bring your pet’s closest people together in one place where they can show support. Join the waitlist to get early access to PawCircle.
           </p>
           <form
             action=""
-            className="flex flex-col items-start gap-2 max-sm:w-[90%] md:w-[70%] bg-white p-5 rounded-xl border-purple-700 border"
+            className="flex flex-col items-start gap-2 max-sm:w-[90%] md:w-[70%] bg-white p-5 rounded-xl shadow-xl border"
             onSubmit={(event) => handleSubmit(event)}
           >
             <div className="firstName flex flex-col gap-2 items-start w-full">
@@ -238,13 +239,13 @@ const Waitlist = () => {
                 }
               ></textarea>
             </div>
-            <button
+            <Button
               className={`mt-5 text-lg text-white font-medium rounded-xl py-1 px-2 w-full ${
                 submitDisabled
-                  ? `bg-gray-700 cursor-not-allowed`
-                  : `bg-purple-700 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 ease-in-out duration-300`
+                  ? `bg-gray-700 cursor-not-allowed hover:bg-gray-700`
+                  : `cursor-pointer`
               }`}
-            >{isLoading ? (<FontAwesomeIcon icon={faPaw} className="border rounded-full animate-spin ease-in-out"/>) : (<span>Join the waitlist<FontAwesomeIcon icon={faArrowRight} className="" /></span> )}</button>
+            >{isLoading ? (<FontAwesomeIcon icon={faPaw} className="border rounded-full animate-spin ease-in-out"/>) : (<span>Join the waitlist</span> )}</Button>
             <p className="font-light text-center w-full">
               By joining, you’ll receive PawCircle updates. Unsubscribe anytime.
             </p>
