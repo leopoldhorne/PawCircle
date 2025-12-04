@@ -37,7 +37,7 @@ const Page = () => {
       if (value.code === ACCESS_CODE) {
         setHasAccess(true);
       }
-      console.log("submitted access code:", value.code);
+      //console.log("submitted access code:", value.code);
     },
   });
 

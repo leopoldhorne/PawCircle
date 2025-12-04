@@ -83,7 +83,7 @@ export function SignUp({ className, ...props }: React.ComponentProps<"form">) {
     onSubmit: async ({ value }) => {
       setSpinner(true);
       mutate(value);
-      console.log("signup submit", value);
+      // console.log("signup submit", value);
     },
   });
 
@@ -96,15 +96,18 @@ export function SignUp({ className, ...props }: React.ComponentProps<"form">) {
       }}
       {...props}
     >
-      {yes ? (
+      {!yes ? (
         <div className="mt-4 border border-purple-600 bg-purple-50 text-black text-sm text-center p-3 rounded">
           📩 <strong>Check your inbox!</strong>
           <br />A confirmation email has been sent by{" "}
-          <strong>Supabase Auth</strong>
+          <strong>PawCircle</strong>
           <br />
           <span className="font-mono text-xs">
-            &lt;noreply@mail.app.supabase.io&gt;
+            &lt;pawcircleteam@gmail.com&gt;
           </span>
+          <br />
+          <br />
+          Check your regular mail folder and <b>SPAM FOLDER</b>
           <br />
           <br />
           You must click the link in that email to verify your account <br />
@@ -113,6 +116,7 @@ export function SignUp({ className, ...props }: React.ComponentProps<"form">) {
           <br />
           Once confirmed, return to the landing page and use the menu <br />
           to navigate to <strong>Sign In</strong>.
+          <br/>
         </div>
       ) : (
         <>
