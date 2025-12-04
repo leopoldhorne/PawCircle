@@ -77,7 +77,11 @@ async function handleCheckoutSessionCompleted(
         throw new Error("CANT UPDATE DB:")
     }
 
-    sendGiftEmail({userId: userId, petName: petName, creatorAmountCents: amount_total! - platformFeeCents, gifterEmail: supporterEmail!, giftNote: note || ""})
+    console.log("sending gift email")
+
+    await sendGiftEmail({userId: userId, petName: petName, creatorAmountCents: amount_total! - platformFeeCents, gifterEmail: supporterEmail!, giftNote: note || ""})
+
+    console.log("gift email sent")
 
 
 
