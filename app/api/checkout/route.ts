@@ -42,6 +42,17 @@ export async function POST(request: NextRequest) {
       metadata: { petId, petSlug, petName, userId },
       success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/thank-you?sesion_id={CHECKOUT_SESSION_ID}&petName=${encodeURIComponent(petName)}&imageUrl=${encodeURIComponent(petImageUrl)}&amount=${encodeURIComponent(amount_in_cents)}`,
       cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/p/${petSlug}`,
+      custom_fields: [
+        {
+          key: "note",
+          label: {
+            type: "custom",
+            custom: `Add a message for ${petName[0].toUpperCase() + petName.slice(1)}`
+          },
+          type: "text",
+          optional: true,
+        },
+      ],
     });
 
     return NextResponse.json({ url: session.url });

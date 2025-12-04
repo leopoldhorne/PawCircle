@@ -55,6 +55,8 @@ async function handleCheckoutSessionCompleted(
 
     const platformFeeCents = Math.floor(amount_total! * platformFee)
 
+    const note = session.custom_fields[0].text?.value || null
+
     const { data, error } = await supabaseAdmin.from("gifts").insert({
         user_id: userId,
         pet_id: petId,
@@ -67,6 +69,7 @@ async function handleCheckoutSessionCompleted(
         available_at: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
         supporter_email: supporterEmail,
         supporter_name: supporterName,
+        note: note,
     })
 
     if (error) {
@@ -74,7 +77,7 @@ async function handleCheckoutSessionCompleted(
         throw new Error("CANT UPDATE DB:")
     }
 
-    sendGiftEmail({userId: userId, petName: petName, creatorAmountCents: amount_total! - platformFeeCents, gifterEmail: supporterEmail!})
+    sendGiftEmail({userId: userId, petName: petName, creatorAmountCents: amount_total! - platformFeeCents, gifterEmail: supporterEmail!, giftNote: note || ""})
 
 
 

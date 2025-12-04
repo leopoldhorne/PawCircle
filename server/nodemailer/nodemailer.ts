@@ -16,11 +16,13 @@ export async function sendGiftEmail({
   petName,
   creatorAmountCents,
   gifterEmail,
+  giftNote,
 }: {
   userId: string;
   petName: string;
   creatorAmountCents: number;
   gifterEmail: string;
+  giftNote?: string,
 }) {
   const { data: userEmail, error: userEmailError } = await supabaseAdmin
     .from("users")
@@ -32,6 +34,11 @@ export async function sendGiftEmail({
     throw new Error("CANT FIND USER EMAIL");
   }
   try {
+    
+    const noteHtml = giftNote
+    ? `<p style="margin-top: 16px;"><strong>Message from the gifter:</strong><br/>${giftNote}</p>`
+    : "";
+
     const info = await transporter.sendMail({
       from: '"PawCircle" <pawcircleteam@gmail.com>',
       to: userEmail?.email,
@@ -48,7 +55,9 @@ export async function sendGiftEmail({
         <strong>${gifterEmail}</strong>
       </p>
 
-      <p>You can view this gift and your updated balance in your dashboard:</p>
+       ${noteHtml}
+
+      <p>You can view your updated balance in your dashboard:</p>
 
       <a href="https://pawcircle.app/auth"
          style="display:inline-block;background:#9333ea;color:white;padding:10px 18px;border-radius:6px;text-decoration:none;margin-top:12px;">
@@ -63,10 +72,9 @@ export async function sendGiftEmail({
     </div>
         `,
       text: `
-    New Gift for ${petName}!
+    New Gift Alert!!
     ${petName} just received a gift of $${(creatorAmountCents / 100).toFixed(2)}
     Sent by: ${gifterEmail}
-
     View your dashboard: https://pawcircle.app/auth
     `.trim(),
     });
