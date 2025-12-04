@@ -1,7 +1,7 @@
 import nodemailer from "nodemailer";
 import { supabaseAdmin } from "../db/supabase-admin";
 
-const transporter = nodemailer.createTransport({
+export const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   secure: false,
