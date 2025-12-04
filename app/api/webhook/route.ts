@@ -1,8 +1,8 @@
 import { platformFee } from "@/lib/platform-fee";
 import { stripe } from "@/lib/stripe";
 import { supabaseAdmin } from "@/server/db/supabase-admin";
+import { sendGiftEmail } from "@/server/nodemailer/nodemailer";
 import { NextRequest, NextResponse } from "next/server";
-import { platform } from "os";
 import Stripe from "stripe";
 
 export async function POST(request: NextRequest) {
@@ -73,6 +73,10 @@ async function handleCheckoutSessionCompleted(
         console.log(error.message)
         throw new Error("CANT UPDATE DB:")
     }
+
+    sendGiftEmail({userId: userId, petName: petName, creatorAmountCents: amount_total! - platformFeeCents, gifterEmail: supporterEmail!})
+
+
 
   } catch (error: any) {
     console.log(error.message);
