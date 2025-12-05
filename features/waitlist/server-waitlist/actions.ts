@@ -17,7 +17,7 @@ export async function updateValues(form: Waitlist) {
   const range = "A:H";
   const valueInputOption = "USER_ENTERED";
   const callback = null;
-  let values = [[form.firstName?.toLowerCase().trim(), form.lastName?.toLowerCase().trim(), form.email?.toLowerCase().trim(), form.petName?.toLowerCase().trim(), form.petType, form.socials, form.audienceSize, form.message]];
+  let values = [[form.firstName?.toLowerCase().trim(), form.lastName?.toLowerCase().trim(), form.email?.toLowerCase().trim(), form.petName?.toLowerCase().trim(), form.petType, form.socials, form.audienceSize, form.message, new Date().toISOString().replace('T', ' ').slice(0, 19)]];
   const body = {
     values: values,
   };
