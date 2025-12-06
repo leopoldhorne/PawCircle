@@ -51,7 +51,7 @@ export async function generateMetadata({
   const petInfo = info?.petInfo;
   const userId = info?.userId;
 
-  const ogUrl = new URL("/api/og-circle", APP_URL);
+  const ogUrl = new URL("/api/og/og-circle", APP_URL);
   ogUrl.searchParams.set("petName", petInfo.name);
   ogUrl.searchParams.set("blurb", circleInfo.blurb);
   ogUrl.searchParams.set("image", circleInfo.profile_image_url);
