@@ -96,7 +96,7 @@ export function SignUp({ className, ...props }: React.ComponentProps<"form">) {
       }}
       {...props}
     >
-      {!yes ? (
+      {yes ? (
         <div className="mt-4 border border-purple-600 bg-purple-50 text-black text-sm text-center p-3 rounded">
           📩 <strong>Check your inbox!</strong>
           <br />A confirmation email has been sent by{" "}
