@@ -130,10 +130,25 @@ const Page = () => {
     mutate(amount_in_cents);
   };
 
+  const imageData = [
+    {
+      image: circleInfo?.image_1_url,
+      prompt: circleInfo?.image_1_prompt,
+    },
+    {
+      image: circleInfo?.image_2_url,
+      prompt: circleInfo?.image_2_prompt,
+    },
+    {
+      image: circleInfo?.image_3_url,
+      prompt: circleInfo?.image_3_prompt,
+    },
+  ];
+
   return (
-    <main className="bg-purple-50 min-h-screen">
+    <main className="w-full min-h-screen h-fit bg-purple-50">
       <div className="wrapper max-w-6xl mx-auto px-2 py-2 flex justify-center">
-        <Card className="w-full sm:max-w-md h-150 items-center font-bold px-3 justify-between">
+        <Card className="w-full sm:max-w-md min-h-150 h-fit items-center font-bold px-3 justify-between">
           {isLoading ? (
             <SkeletonCircle />
           ) : circleInfo && petInfo ? (
@@ -167,48 +182,58 @@ const Page = () => {
               </div>
 
               {/* Blurb */}
-              <div className="rounded-2xl bg-slate-50 px-4 py-3 w-full">
-                <p className="text-sm leading-relaxed text-slate-700 font-normal">
+              <div className="bg-white border border-slate-200 rounded-2xl shadow-sm px-4 py-4 w-full min-h-10 h-fit">
+                <p className="text-sm leading-relaxed text-slate-700 font-normal max-w-[90%] mx-auto">
                   {circleInfo?.blurb}
                 </p>
               </div>
 
               {/* Images */}
-              <div className="rounded-2xl bg-slate-50 px-4 py-4">
-                <div className="grid grid-cols-3 gap-3">
-                  {data &&
-                    [
-                      circleInfo.image_1_url,
-                      circleInfo.image_2_url,
-                      circleInfo.image_3_url,
-                    ].map((src) => (
-                      <div
-                        key={src}
-                        className="aspect-square overflow-hidden rounded-xl"
-                      >
-                        <Image
-                          src={src && src}
-                          width={400}
-                          height={400}
-                          className="h-full w-full object-cover"
-                          alt="hero images"
-                        />
-                      </div>
-                    ))}
+              <p className="text-lg font-semibold text-slate-700 text-center mb-3 mt-6">
+                {petInfo.name[0].toUpperCase() + petInfo.name.slice(1)}'s
+                Moments
+              </p>
+              {data && imageData.some((item) => item.image) && (
+                <div className="px-4 py-2">
+                  <div className="flex flex-col gap-6">
+                    {imageData
+                      .filter((item) => item.image)
+                      .map((item, index) => (
+                        <div
+                          key={item.image ?? index}
+                          className="w-full bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-col gap-3"
+                        >
+                          {/* Prompt */}
+                          {item.prompt && (
+                            <p className="text-sm text-slate-700 font-medium">
+                              {item.prompt}
+                            </p>
+                          )}
+                          {/* Image */}
+                          <div className="w-full aspect-square overflow-hidden rounded-xl">
+                            <Image
+                              src={item.image}
+                              width={800}
+                              height={800}
+                              alt="Pet photo"
+                              className="w-full h-full object-cover object-center"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Support */}
-              <div className="rounded-2xl bg-slate-50 px-4 py-4 space-y-3 text-center w-full">
-                <p className="text-sm font-bold">
-                  Send
-                  {petInfo &&
-                    ` ${
-                      petInfo.name[0].toUpperCase() + petInfo.name.slice(1)
-                    }`}{" "}
-                  a gift
-                </p>
-                <p className="text-sm leading-relaxed text-slate-700 font-normal">
+              <p className="text-lg font-semibold text-slate-700 text-center mb-3 mt-6">
+                Send{" "}
+                {petInfo &&
+                  petInfo.name[0].toUpperCase() + petInfo.name.slice(1)}{" "}
+                a gift
+              </p>
+              <div className="bg-white border border-slate-200 rounded-2xl shadow-sm px-4 py-4 space-y-3 text-center w-full">
+                <p className="text-sm leading-relaxed text-slate-700 font-normal max-w-[90%] mx-auto">
                   {circleInfo?.support_blurb}
                 </p>
                 <div className="w-full flex gap-5 items-center justify-center">

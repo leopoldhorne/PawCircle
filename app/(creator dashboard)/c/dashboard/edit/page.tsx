@@ -51,7 +51,7 @@ const Page = () => {
       title: "Right Image",
       info: circleData?.image_3_url ? circleData.image_3_url : null,
       image: true,
-      prompt: circleData?.image_2_prompt ? circleData.image_2_prompt : null,
+      prompt: circleData?.image_3_prompt ? circleData.image_3_prompt : null,
       prompt_num: 3,
     },
   ];
@@ -126,7 +126,7 @@ const Page = () => {
                             {" "}
                             <div>Image Prompt:</div>
                             <div className="w-full">
-                              <p className="w-40 h-30 break-all whitespace-normal overflow-clip font-normal">{circle.prompt ? circle.prompt : "Click here to select" }</p>
+                              <p className="w-40 h-30 wrap-break-word whitespace-normal overflow-clip font-normal">{circle.prompt ? circle.prompt : "Click here to select" }</p>
                             </div>
                           </>
                         ) : (

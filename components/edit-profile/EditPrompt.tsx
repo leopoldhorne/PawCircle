@@ -87,6 +87,7 @@ const EditPrompt = ({ openPrompt, setOpenPrompt }: Props) => {
         queryKey: ["circleData", user?.id],
       });
       setOpenPrompt(0);
+      setSelectedPrompt("")
     },
   });
 
@@ -119,7 +120,10 @@ const EditPrompt = ({ openPrompt, setOpenPrompt }: Props) => {
           <div className="flex justify-between w-full">
             <CardTitle>Select a prompt</CardTitle>
             <FontAwesomeIcon
-              onClick={() => setOpenPrompt(0)}
+              onClick={() => {
+                setOpenPrompt(0)
+                setSelectedPrompt("")
+              }}
               icon={faX}
               className="cursor-pointer"
             />

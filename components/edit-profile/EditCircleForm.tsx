@@ -201,7 +201,7 @@ const EditCircleForm = ({ openEdit, setOpenEdit }: Props) => {
                   return (
                     <Field data-invalid={isInvalid}>
                       <FieldLabel htmlFor="form-tanstack-input-supportBlurb">
-                        Support Blurb
+                        Gift Blurb
                       </FieldLabel>
                       <Input
                         id="form-tanstack-input-supportBlurb"
