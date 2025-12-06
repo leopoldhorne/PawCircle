@@ -210,9 +210,9 @@ const Page = () => {
                             </p>
                           )}
                           {/* Image */}
-                          <div className="w-full aspect-square overflow-hidden rounded-xl">
+                          <div className="w-full aspect-square overflow-hidden rounded-xl bg-slate-100">
                             <img
-                              src={item.image || ""}
+                              src={item.image}
                               loading="lazy"
                               alt="Pet photo"
                               className="w-full h-full object-cover object-center"
