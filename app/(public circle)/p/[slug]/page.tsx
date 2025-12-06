@@ -219,6 +219,8 @@ const Page = () => {
                               height={800}
                               alt="Pet photo"
                               className="w-full h-full object-cover object-center"
+                              loading="eager"
+                              priority={index === 0}
                             />
                           </div>
                         </div>
