@@ -7,6 +7,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabase } from "@/server/db/supabase-client";
 import SkeletonCircle from "@/components/public-circle/SkeletonCircle";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
 interface CircleAndPet {
   circleInfo: any;
@@ -96,8 +97,8 @@ const checkoutGift = async (
 };
 
 const Page = () => {
+  const [imagesReady, setImagesReady] = useState(false);
   const { slug } = useParams();
-
   const { data, error, isLoading } = useQuery<CircleAndPet | null, Error>({
     queryKey: ["data", slug],
     queryFn: () => fetchCircle(slug as string),
@@ -130,21 +131,51 @@ const Page = () => {
     mutate(amount_in_cents);
   };
 
+  useEffect(() => {
+    if (!circleInfo) return;
+
+    const urls = [
+      circleInfo.image_1_url,
+      circleInfo.image_2_url,
+      circleInfo.image_3_url,
+    ].filter(Boolean) as string[];
+
+    if (urls.length === 0) return;
+
+    let loadedCount = 0;
+    const imgElements: HTMLImageElement[] = [];
+
+    urls.forEach((url) => {
+      const img = new window.Image();
+      img.src = url;
+
+      const handleDone = () => {
+        loadedCount += 1;
+        if (loadedCount === urls.length) {
+          setImagesReady(true);
+        }
+      };
+
+      img.onload = handleDone;
+      img.onerror = handleDone;
+
+      imgElements.push(img);
+    });
+
+    return () => {
+      imgElements.forEach((img) => {
+        img.onload = null;
+        img.onerror = null;
+      });
+    };
+  }, [circleInfo]);
+
   const imageData = circleInfo
     ? [
-        {
-          image: circleInfo?.image_1_url,
-          prompt: circleInfo?.image_1_prompt,
-        },
-        {
-          image: circleInfo?.image_2_url,
-          prompt: circleInfo?.image_2_prompt,
-        },
-        {
-          image: circleInfo?.image_3_url,
-          prompt: circleInfo?.image_3_prompt,
-        },
-      ]
+        { image: circleInfo.image_1_url, prompt: circleInfo.image_1_prompt },
+        { image: circleInfo.image_2_url, prompt: circleInfo.image_2_prompt },
+        { image: circleInfo.image_3_url, prompt: circleInfo.image_3_prompt },
+      ].filter((item) => !!item.image)
     : [];
 
   return (
@@ -195,36 +226,31 @@ const Page = () => {
                 {petInfo.name[0].toUpperCase() + petInfo.name.slice(1)}'s
                 Moments
               </p>
-              {data && imageData.some((item) => item.image) && (
+              {data && imagesReady && imageData.length > 0 && (
                 <div className="px-4 py-2">
                   <div className="flex flex-col gap-6">
-                    {imageData
-                      .filter((item) => item.image)
-                      .map((item, index) => (
-                        <div
-                          key={item.image ?? index}
-                          className="w-full bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-col gap-3"
-                        >
-                          {/* Prompt */}
-                          {item.prompt && (
-                            <p className="text-sm text-slate-700 font-medium">
-                              {item.prompt}
-                            </p>
-                          )}
-                          {/* Image */}
-                          <div className="w-full aspect-square overflow-hidden rounded-xl bg-slate-100">
-                            <Image
-                              src={item.image!}
-                              width={800}
-                              height={800}
-                              alt="Pet photo"
-                              className="w-full h-full object-cover object-center"
-                              loading="eager"
-                              priority={index === 0}
-                            />
-                          </div>
+                    {imageData.map((item, index) => (
+                      <div
+                        key={item.image ?? index}
+                        className="w-full bg-white rounded-2xl border border-slate-200 shadow-sm p-4 flex flex-col gap-3"
+                      >
+                        {/* Prompt */}
+                        {item.prompt && (
+                          <p className="text-sm text-slate-700 font-normal max-w-[90%] mx-auto">
+                            {item.prompt}
+                          </p>
+                        )}
+
+                        {/* Image */}
+                        <div className="w-full aspect-square overflow-hidden rounded-xl bg-slate-100">
+                          <img
+                            src={item.image as string}
+                            alt="Pet photo"
+                            className="w-full h-full object-cover object-center"
+                          />
                         </div>
-                      ))}
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}
