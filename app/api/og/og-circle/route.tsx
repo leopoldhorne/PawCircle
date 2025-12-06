@@ -104,7 +104,7 @@ export async function GET(req: Request) {
                 marginBottom: 16,
               }}
             >
-              {petName}
+              {petName[0] + petName.slice(1)}
             </div>
 
             <div
