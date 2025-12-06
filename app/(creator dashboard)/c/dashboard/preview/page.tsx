@@ -28,7 +28,7 @@ const Page = () => {
   return (
     <main className="bg-purple-50 min-h-screen">
       <div className="wrapper max-w-6xl mx-auto px-2 py-2 flex justify-center">
-        <Card className="w-full sm:max-w-md min-h-150 h-fit items-center font-bold px-3 justify-between">
+        <Card className="w-full sm:max-w-md h-150 items-center font-bold px-3 justify-between">
           <div
             onClick={() => router.push("/c/dashboard")}
             className="w-full flex cursor-pointer items-center justify-between"
