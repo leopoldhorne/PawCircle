@@ -178,7 +178,7 @@ const EditImagesForm = ({ openEdit, setOpenEdit }: Props) => {
 
   return (
     <div
-      className={`fixed w-screen h-screen bg-black/80 z-10 flex items-start justify-center ${
+      className={`fixed inset-0 w-screen h-screen bg-black/80 z-10 flex items-start justify-center ${
         !selectedOpenEdits.some((e) => e === openEdit) && "hidden"
       }`}
     >

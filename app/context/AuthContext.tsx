@@ -80,6 +80,9 @@ export interface CircleData {
   image_1_url?: string | null,
   image_2_url?: string | null,
   image_3_url?: string | null,
+  image_1_prompt?: string | null,
+  image_2_prompt?: string | null,
+  image_3_prompt?: string | null,
   updated_at?: string | null,
 
 }
