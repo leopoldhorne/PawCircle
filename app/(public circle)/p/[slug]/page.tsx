@@ -213,6 +213,7 @@ const Page = () => {
                           <div className="w-full aspect-square overflow-hidden rounded-xl">
                             <img
                               src={item.image || ""}
+                              loading="lazy"
                               alt="Pet photo"
                               className="w-full h-full object-cover object-center"
                             />
