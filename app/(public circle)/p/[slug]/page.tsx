@@ -211,7 +211,7 @@ const Page = () => {
                           )}
                           {/* Image */}
                           <div className="w-full aspect-square overflow-hidden rounded-xl">
-                            <Image
+                            <img
                               src={item.image || ""}
                               alt="Pet photo"
                               className="w-full h-full object-cover object-center"
