@@ -8,6 +8,56 @@ import { supabase } from "@/server/db/supabase-client";
 import SkeletonCircle from "@/components/public-circle/SkeletonCircle";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
+import { Metadata } from "next";
+
+const APP_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const info = await fetchCircle(params.slug);
+
+  if (!info) {
+    return {
+      title: "PawCircle",
+      description: "Build your pet's village.",
+    };
+  }
+  const circleInfo = info?.circleInfo;
+  const petInfo = info?.petInfo;
+  const userId = info?.userId;
+
+  const ogUrl = new URL("/api/og-circle", APP_URL);
+  ogUrl.searchParams.set("petName", petInfo.name);
+  ogUrl.searchParams.set("blurb", circleInfo.blurb);
+  ogUrl.searchParams.set("image", circleInfo.profile_image_url);
+
+  return {
+    title: `${petInfo.name[0] + petInfo.name.slice(1)}'s Public Circle`,
+    description: circleInfo.blurb,
+    openGraph: {
+      title: `${petInfo.name[0] + petInfo.name.slice(1)}'s Public Circle`,
+      description: circleInfo.blurb,
+      url: `${APP_URL}/p/${params.slug}`,
+      siteName: "PawCircle",
+      images: [
+        {
+          url: ogUrl.toString(),
+          height: 1200,
+          width: 630,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${petInfo.name[0] + petInfo.name.slice(1)}'s Public Circle`,
+      description: circleInfo.blurb,
+      images: [ogUrl.toString()],
+    }
+  };
+}
 
 interface CircleAndPet {
   circleInfo: any;
