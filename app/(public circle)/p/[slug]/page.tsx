@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import PublicCircle from "@/components/public-circle/PublicCircle";
 import { supabaseAdmin } from "@/server/db/supabase-admin";
 
-const APP_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"
+const APP_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 const fetchCircle = async (slug: string): Promise<CircleAndPet | null> => {
   const { data, error } = await supabaseAdmin
