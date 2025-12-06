@@ -130,20 +130,22 @@ const Page = () => {
     mutate(amount_in_cents);
   };
 
-  const imageData = [
-    {
-      image: circleInfo?.image_1_url,
-      prompt: circleInfo?.image_1_prompt,
-    },
-    {
-      image: circleInfo?.image_2_url,
-      prompt: circleInfo?.image_2_prompt,
-    },
-    {
-      image: circleInfo?.image_3_url,
-      prompt: circleInfo?.image_3_prompt,
-    },
-  ];
+  const imageData = circleInfo
+    ? [
+        {
+          image: circleInfo?.image_1_url,
+          prompt: circleInfo?.image_1_prompt,
+        },
+        {
+          image: circleInfo?.image_2_url,
+          prompt: circleInfo?.image_2_prompt,
+        },
+        {
+          image: circleInfo?.image_3_url,
+          prompt: circleInfo?.image_3_prompt,
+        },
+      ]
+    : [];
 
   return (
     <main className="w-full min-h-screen h-fit bg-purple-50">
@@ -211,9 +213,10 @@ const Page = () => {
                           )}
                           {/* Image */}
                           <div className="w-full aspect-square overflow-hidden rounded-xl bg-slate-100">
-                            <img
-                              src={item.image}
-                              loading="lazy"
+                            <Image
+                              src={item.image!}
+                              width={800}
+                              height={800}
                               alt="Pet photo"
                               className="w-full h-full object-cover object-center"
                             />
