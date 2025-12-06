@@ -104,7 +104,7 @@ export async function GET(req: Request) {
                 marginBottom: 16,
               }}
             >
-              {petName[0] + petName.slice(1)}
+              {petName[0].toUpperCase() + petName.slice(1)}
             </div>
 
             <div
