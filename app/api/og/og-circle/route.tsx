@@ -105,7 +105,7 @@ export async function GET(req: Request) {
             >
               {petName[0].toUpperCase() + petName.slice(1)}
             </div>
-            {!!blurb && (
+            {blurb !== "null" && (
               <div
                 style={{
                   fontSize: 24,
