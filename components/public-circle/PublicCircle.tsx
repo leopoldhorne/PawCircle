@@ -97,14 +97,14 @@ const checkoutGift = async (
   return data;
 };
 
-const PublicCircle = ({slug}: {slug: string}) => {
+const PublicCircle = ({ slug }: { slug: string }) => {
   const [imagesReady, setImagesReady] = useState(false);
   const { data, error, isLoading } = useQuery<CircleAndPet | null, Error>({
     queryKey: ["data", slug],
     queryFn: () => fetchCircle(slug as string),
     enabled: !!slug,
   });
-  
+
   const circleInfo = data?.circleInfo;
   const petInfo = data?.petInfo;
   const userId = data?.userId;
@@ -216,11 +216,13 @@ const PublicCircle = ({slug}: {slug: string}) => {
               </div>
 
               {/* Blurb */}
-              <div className="bg-white border border-slate-200 rounded-2xl shadow-sm px-4 py-4 w-full min-h-10 h-fit">
-                <p className="text-sm leading-relaxed text-slate-700 font-normal max-w-[90%] mx-auto">
-                  {circleInfo?.blurb}
-                </p>
-              </div>
+              {!!circleInfo.blurb && (
+                <div className="bg-white border border-slate-200 rounded-2xl shadow-sm px-4 py-4 w-full min-h-10 h-fit">
+                  <p className="text-sm leading-relaxed text-slate-700 font-normal max-w-[90%] mx-auto">
+                    {circleInfo?.blurb}
+                  </p>
+                </div>
+              )}
 
               {/* Images */}
               <p className="text-lg font-semibold text-slate-700 text-center mb-3 mt-6">
@@ -264,9 +266,11 @@ const PublicCircle = ({slug}: {slug: string}) => {
                 a gift
               </p>
               <div className="bg-white border border-slate-200 rounded-2xl shadow-sm px-4 py-4 space-y-3 text-center w-full">
-                <p className="text-sm leading-relaxed text-slate-700 font-normal max-w-[90%] mx-auto">
-                  {circleInfo?.support_blurb}
-                </p>
+                {!!circleInfo?.support_blurb && (
+                  <p className="text-sm leading-relaxed text-slate-700 font-normal max-w-[90%] mx-auto">
+                    {circleInfo?.support_blurb}
+                  </p>
+                )}
                 <div className="w-full flex gap-5 items-center justify-center">
                   <Button
                     onClick={() => handleGift(300)}

@@ -105,12 +105,13 @@ const Page = () => {
               </div>
 
               {/* Blurb */}
-              <div className="bg-white border border-slate-200 rounded-2xl shadow-sm px-4 py-4 w-full min-h-10 h-fit">
-                <p className="text-sm leading-relaxed text-slate-700 font-normal max-w-[90%] mx-auto">
-                  {circleData?.blurb}
-                </p>
-              </div>
-
+              {!!circleData?.blurb && (
+                <div className="bg-white border border-slate-200 rounded-2xl shadow-sm px-4 py-4 w-full min-h-10 h-fit">
+                  <p className="text-sm leading-relaxed text-slate-700 font-normal max-w-[90%] mx-auto">
+                    {circleData?.blurb}
+                  </p>
+                </div>
+              )}
               {/* Images */}
               <p className="text-lg font-semibold text-slate-700 text-center mb-3 mt-6">
                 {pet?.name[0].toUpperCase() + pet?.name.slice(1)!}'s Moments
@@ -149,9 +150,12 @@ const Page = () => {
                 gift
               </p>
               <div className="bg-white border border-slate-200 rounded-2xl shadow-sm px-4 py-4 space-y-3 text-center w-full">
-                <p className="text-sm leading-relaxed text-slate-700 font-normal max-w-[90%] mx-auto">
-                  {circleData?.support_blurb}
-                </p>
+                {!!circleData?.support_blurb && (
+                  <p className="text-sm leading-relaxed text-slate-700 font-normal max-w-[90%] mx-auto">
+                    {circleData?.support_blurb}
+                  </p>
+                )}
+
                 <div className="w-full flex gap-5 items-center justify-center">
                   <Button className="cursor-pointer font-bold h-12 w-12 text-base">
                     $3
