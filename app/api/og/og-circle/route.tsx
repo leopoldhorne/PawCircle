@@ -9,8 +9,7 @@ export async function GET(req: Request) {
   const blurbRaw = searchParams.get("blurb") || "";
   const imageUrl = searchParams.get("image") || "";
 
-  const blurb =
-    blurbRaw.length > 160 ? blurbRaw.slice(0, 157) + "…" : blurbRaw;
+  const blurb = blurbRaw.length > 160 ? blurbRaw.slice(0, 157) + "…" : blurbRaw;
 
   return new ImageResponse(
     (
@@ -106,19 +105,19 @@ export async function GET(req: Request) {
             >
               {petName[0].toUpperCase() + petName.slice(1)}
             </div>
-
-            <div
-              style={{
-                fontSize: 24,
-                lineHeight: 1.4,
-                color: "#4b5563",
-                marginBottom: 24,
-                maxWidth: 560,
-              }}
-            >
-              {blurb}
-            </div>
-
+            {!!blurb && (
+              <div
+                style={{
+                  fontSize: 24,
+                  lineHeight: 1.4,
+                  color: "#4b5563",
+                  marginBottom: 24,
+                  maxWidth: 560,
+                }}
+              >
+                {blurb}
+              </div>
+            )}
             <div
               style={{
                 padding: "10px 18px",
@@ -127,7 +126,7 @@ export async function GET(req: Request) {
                 color: "#6d28d9",
                 fontSize: 20,
                 fontWeight: 600,
-                display: "flex",            // ⬅️ NOTE: flex, NOT inline-flex
+                display: "flex", // ⬅️ NOTE: flex, NOT inline-flex
                 alignItems: "center",
                 justifyContent: "center",
               }}
