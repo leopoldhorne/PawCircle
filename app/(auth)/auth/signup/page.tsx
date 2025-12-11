@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import Logo from "@/components/logo/logo";
 import { SignUp } from "@/components/SignUp";
 import { SignupForm } from "@/components/signup-form";
@@ -34,7 +36,7 @@ const Page = () => {
     if (rc === "askajskajska") {
       setHasAccess(true)
     }
-  }, [])
+  }, [rc])
 
   const form = useForm({
     defaultValues: {
