@@ -93,10 +93,10 @@ const Waitlist = () => {
       <section id="waitlist" className="bg-white h-fit">
         <div className="wrapper max-w-6xl mx-auto px-5 py-10 flex flex-col justify-center items-center gap-5 h-full text-center">
           <h4 className="title text-4xl font-bold max-md:text-2xl">
-            Be one of the first to try PawCircle
+            Early access is limited. Join the creator waitlist.
           </h4>
           <p className="para text-lg md:w-[75%] max-md:text-base">
-            Bring your pet’s closest people together in one place where they can show support. Join the waitlist to get early access to PawCircle.
+            We release new invites each week for creators who want to set up a page for their pet.
           </p>
           <form
             action=""
@@ -247,7 +247,7 @@ const Waitlist = () => {
               }`}
             >{isLoading ? (<FontAwesomeIcon icon={faPaw} className="border rounded-full animate-spin ease-in-out"/>) : (<span>Join the waitlist</span> )}</Button>
             <p className="font-light text-center w-full">
-              By joining, you’ll receive PawCircle updates. Unsubscribe anytime.
+              By joining, you’ll receive PawCircle updates and your early access link. Unsubscribe anytime.
             </p>
           </form>
         </div>
