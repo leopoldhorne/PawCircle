@@ -13,7 +13,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { useForm } from "@tanstack/react-form";
 import { GalleryVerticalEnd } from "lucide-react";
-import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import z from "zod";
 
 const ACCESS_CODE = "esther123";
@@ -24,6 +25,16 @@ const accessSchema = z.object({
 
 const Page = () => {
   const [hasAccess, setHasAccess] = useState<boolean>(false);
+
+  const searchParams = useSearchParams()
+  const rc = searchParams.get("rc") // random code to skip auth
+  const c = searchParams.get("c") // creator name so i can see if someone is secretly passing out the link
+
+  useEffect(() => {
+    if (rc === "askajskajska") {
+      setHasAccess(true)
+    }
+  }, [])
 
   const form = useForm({
     defaultValues: {
