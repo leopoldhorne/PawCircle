@@ -1,7 +1,5 @@
 "use client";
 
-export const dynamic = "force-dynamic";
-
 import Logo from "@/components/logo/logo";
 import { SignUp } from "@/components/SignUp";
 import { SignupForm } from "@/components/signup-form";
@@ -16,7 +14,7 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "@tanstack/react-form";
 import { GalleryVerticalEnd } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import z from "zod";
 
 const ACCESS_CODE = "esther123";
@@ -25,7 +23,7 @@ const accessSchema = z.object({
   code: z.string().min(1, "Access code is required."),
 });
 
-const Page = () => {
+const SignupContent = () => {
   const [hasAccess, setHasAccess] = useState<boolean>(false);
 
   const searchParams = useSearchParams()
@@ -109,6 +107,14 @@ const Page = () => {
         ) : <SignUp />}
       </div>
     </div>
+  );
+};
+
+const Page = () => {
+  return (
+    <Suspense fallback={null}>
+      <SignupContent />
+    </Suspense>
   );
 };
 
